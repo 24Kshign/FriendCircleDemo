@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingBottom="6dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="6dp">
+
+    <RelativeLayout
+        android:id="@+id/ir_rv_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ir_iv_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_avatar_to" />
+
+        <TextView
+            android:id="@+id/ir_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ir_iv_avatar"
+            android:text="24K纯帅"
+            android:textColor="#23659b"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/ir_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="2016年8月31日"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/ir_tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ir_tv_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@+id/ir_iv_avatar"
+            android:text="萨达阿斯顿阿斯顿阿斯顿阿斯顿"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/ir_iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_below="@+id/ir_rv_top" />
+
+    <RelativeLayout
+        android:id="@+id/ir_rv_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_below="@+id/ir_iv_image"
+        android:layout_marginTop="6dp">
+
+        <ImageView
+            android:id="@+id/ir_iv_praise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/ir_iv_comment"
+            android:padding="6dp"
+            android:src="@drawable/praise_bg" />
+
+        <ImageView
+            android:id="@+id/ir_iv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="6dp"
+            android:src="@mipmap/icon_comment" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ir_recyclerview"
+        android:layout_below="@+id/ir_rv_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+    </style>
+
+    <style name="SplashTheme">
+        <item name="android:windowBackground">@mipmap/icon_splash</item>
+    </style>
+
+</resources>
