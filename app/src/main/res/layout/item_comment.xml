@@ -2,51 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="20dp"
-    android:paddingTop="6dp"
+    android:background="#f7f2f2"
     android:paddingBottom="6dp"
+    android:paddingLeft="20dp"
     android:paddingRight="6dp"
-    android:background="#f7f2f2">
+    android:paddingTop="6dp">
 
     <ImageView
         android:id="@+id/ic_iv_avatar"
         android:layout_width="30dp"
-        android:src="@mipmap/icon_avatar_from"
         android:layout_height="30dp" />
 
     <LinearLayout
         android:id="@+id/ic_lv_nick"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
-        android:layout_toRightOf="@+id/ic_iv_avatar"
-        android:layout_height="wrap_content">
+        android:layout_toRightOf="@+id/ic_iv_avatar">
+
         <TextView
             android:id="@+id/ic_tv_nick_name"
             android:layout_width="0dp"
-            android:textSize="14dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="24K纯帅回复我"
-            android:layout_height="wrap_content" />
+            android:textColor="#23659b"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/ic_tv_time"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="2016年11月8日13:00"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/ic_tv_content"
         android:layout_width="wrap_content"
-        android:layout_toRightOf="@+id/ic_iv_avatar"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ic_lv_nick"
-        android:textSize="14dp"
-        android:layout_marginTop="4dp"
         android:layout_marginLeft="6dp"
-        android:text="NASA说的阿斯顿阿四dasd阿斯顿啊等阿斯顿阿斯顿阿斯顿阿斯顿"
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/ic_iv_avatar"
+        android:textSize="14dp" />
 
 </RelativeLayout>

@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:paddingBottom="6dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
     android:paddingTop="6dp">
 
     <RelativeLayout
@@ -54,16 +54,18 @@
     <ImageView
         android:id="@+id/ir_iv_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="240dp"
+        android:layout_below="@+id/ir_rv_top"
         android:layout_marginTop="6dp"
-        android:layout_below="@+id/ir_rv_top" />
+        android:maxHeight="240dp"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/ir_rv_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
         android:layout_below="@+id/ir_iv_image"
+        android:layout_marginBottom="6dp"
         android:layout_marginTop="6dp">
 
         <ImageView
@@ -86,8 +88,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ir_recyclerview"
-        android:layout_below="@+id/ir_rv_bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ir_rv_bottom" />
 
 </RelativeLayout>

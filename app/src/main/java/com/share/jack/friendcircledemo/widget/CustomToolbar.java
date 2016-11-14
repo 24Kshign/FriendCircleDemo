@@ -67,7 +67,7 @@ public class CustomToolbar extends Toolbar {
         mTvMainTitleLeft.setTextColor(color);
     }
 
-    public void setTvMainTitleLeftOnClick(final Activity activity){
+    public void setTvMainTitleLeftOnClick(final Activity activity) {
         mTvMainTitleLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +78,7 @@ public class CustomToolbar extends Toolbar {
 
     //设置title左边图标
     public void setMainTitleLeftDrawable(int res) {
+        mTvMainTitleLeft.setVisibility(View.VISIBLE);
         Drawable dwLeft = ContextCompat.getDrawable(getContext(), res);
         dwLeft.setBounds(0, 0, dwLeft.getMinimumWidth(), dwLeft.getMinimumHeight());
         mTvMainTitleLeft.setCompoundDrawables(dwLeft, null, null, null);
@@ -96,9 +97,14 @@ public class CustomToolbar extends Toolbar {
 
     //设置title右边图标
     public void setMainTitleRightDrawable(int res) {
+        mTvMainTitleRight.setVisibility(View.VISIBLE);
         Drawable dwRight = ContextCompat.getDrawable(getContext(), res);
         dwRight.setBounds(0, 0, dwRight.getMinimumWidth(), dwRight.getMinimumHeight());
         mTvMainTitleRight.setCompoundDrawables(null, null, dwRight, null);
+    }
+
+    public void setTvMainTitleRightOnClick(OnClickListener listener) {
+        mTvMainTitleRight.setOnClickListener(listener);
     }
 
     //设置toolbar状态栏颜色

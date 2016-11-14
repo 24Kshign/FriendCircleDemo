@@ -5,5 +5,32 @@
     android:background="@color/color_background"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/publish_titlebar"
+        layout="@layout/layout_title_bar" />
+
+
+    <EditText
+        android:id="@+id/ap_et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="left|top"
+        android:lines="5"
+        android:paddingBottom="4dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="4dp"
+        android:hint="来了说点什么吧...."
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/ap_select_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="6dp"
+        android:src="@mipmap/icon_add_pic" />
 
 </LinearLayout>

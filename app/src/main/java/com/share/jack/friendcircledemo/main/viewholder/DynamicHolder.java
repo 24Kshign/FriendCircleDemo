@@ -4,6 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,12 +14,12 @@ import com.share.jack.cygtool.recyclerview.holder.CygBaseViewHolder;
 import com.share.jack.cygtool.util.CygTimeUtil;
 import com.share.jack.friendcircledemo.R;
 import com.share.jack.friendcircledemo.main.adapter.CommentAdapter;
-import com.share.jack.friendcircledemo.main.bean.DynamicDate;
+import com.share.jack.friendcircledemo.main.bean.DynamicData;
 
 /**
  *
  */
-public class DynamicHolder extends CygBaseViewHolder<DynamicDate> {
+public class DynamicHolder extends CygBaseViewHolder<DynamicData> {
 
     public ImageView avatar;
     public TextView nickName;
@@ -43,13 +44,17 @@ public class DynamicHolder extends CygBaseViewHolder<DynamicDate> {
     }
 
     @Override
-    public void setData(DynamicDate dynamicDate) {
+    public void setData(DynamicData dynamicDate) {
         avatar.setImageResource(R.mipmap.icon_avatar_from);
         nickName.setText(dynamicDate.getUserProfile().getUsername());
+        content.setText(dynamicDate.getContent());
         time.setText(CygTimeUtil.longToString(dynamicDate.getTime()));
-        Glide.with(getContext()).load(dynamicDate.getImageUrl()).asBitmap()
-                .dontAnimate().placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher).into(image);
+        if (!dynamicDate.getImageUrl().isEmpty()) {
+            image.setVisibility(View.VISIBLE);
+            Glide.with(getContext()).load(dynamicDate.getImageUrl()).asBitmap()
+                    .dontAnimate().placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher).into(image);
+        }
         if (dynamicDate.getCommentDataList() != null) {
             adapter = new CommentAdapter(getContext(), null);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

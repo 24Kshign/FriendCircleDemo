@@ -7,7 +7,7 @@ import java.util.List;
 /**
  *
  */
-public class DynamicDate {
+public class DynamicData {
 
     private Integer id;
     private UserProfile userProfile;
@@ -15,6 +15,8 @@ public class DynamicDate {
     private Long time;
     private String content;
     private List<CommentData> commentDataList;
+    private List<PraiseData> praiseDataList;
+    private Integer praiseCount;
 
     public Integer getId() {
         return id;
@@ -62,5 +64,21 @@ public class DynamicDate {
 
     public void setCommentDataList(List<CommentData> commentDataList) {
         this.commentDataList = commentDataList;
+    }
+
+    public List<PraiseData> getPraiseDataList() {
+        return praiseDataList;
+    }
+
+    public void setPraiseDataList(List<PraiseData> praiseDataList) {
+        this.praiseDataList = praiseDataList;
+    }
+
+    public Integer getPraiseCount() {
+        return praiseCount;
+    }
+
+    public void setPraiseCount(Integer praiseCount) {
+        this.praiseCount = praiseCount;
     }
 }

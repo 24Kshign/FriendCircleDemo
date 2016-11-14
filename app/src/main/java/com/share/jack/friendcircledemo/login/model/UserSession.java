@@ -21,4 +21,11 @@ public class UserSession {
     public static void destroyUserSession() {
         SharePreferenceUtil.clearSharePreference(ConfUtil.LOGIN_INFO);
     }
+
+    public static UserProfile getUserProfile() {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setId(SharePreferenceUtil.getInt(ConfUtil.LOGIN_INFO, ConfUtil.USER_ID, -1));
+        userProfile.setUsername(SharePreferenceUtil.getString(ConfUtil.LOGIN_INFO, ConfUtil.USER_NAME, "24K纯帅"));
+        return userProfile;
+    }
 }

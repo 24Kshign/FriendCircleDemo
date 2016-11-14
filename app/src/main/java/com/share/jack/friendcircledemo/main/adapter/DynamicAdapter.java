@@ -7,13 +7,13 @@ import android.widget.Toast;
 
 import com.share.jack.cygtool.recyclerview.adapter.CygBaseRecyclerAdapter;
 import com.share.jack.friendcircledemo.R;
-import com.share.jack.friendcircledemo.main.bean.DynamicDate;
+import com.share.jack.friendcircledemo.main.bean.DynamicData;
 import com.share.jack.friendcircledemo.main.viewholder.DynamicHolder;
 
 /**
  *
  */
-public class DynamicAdapter extends CygBaseRecyclerAdapter<DynamicDate, DynamicHolder> {
+public class DynamicAdapter extends CygBaseRecyclerAdapter<DynamicData, DynamicHolder> {
 
     public DynamicAdapter(Context context) {
         super(context);
@@ -35,6 +35,7 @@ public class DynamicAdapter extends CygBaseRecyclerAdapter<DynamicDate, DynamicH
                 Toast.makeText(getContext(), "点击了点赞", Toast.LENGTH_SHORT).show();
             }
         });
+
         dynamicHolder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

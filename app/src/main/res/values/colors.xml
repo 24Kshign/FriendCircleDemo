@@ -6,4 +6,5 @@
 
     <color name="color_background">#fff8f8f8</color>
     <color name="color_divider">#ffd6d6d6</color>
+    <color name="color_black_light">#545050</color>
 </resources>

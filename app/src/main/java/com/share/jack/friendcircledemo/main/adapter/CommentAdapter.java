@@ -1,6 +1,7 @@
 package com.share.jack.friendcircledemo.main.adapter;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.share.jack.cygtool.recyclerview.adapter.CygBaseRecyclerAdapter;
@@ -20,5 +21,16 @@ public class CommentAdapter extends CygBaseRecyclerAdapter<CommentData, CommentH
     @Override
     public CommentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new CommentHolder(parent, R.layout.item_comment);
+    }
+
+    @Override
+    public void onBindViewHolder(CommentHolder commentHolder, int position) {
+        super.onBindViewHolder(commentHolder, position);
+        commentHolder.lvNick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
