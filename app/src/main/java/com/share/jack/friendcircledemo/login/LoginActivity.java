@@ -2,6 +2,8 @@ package com.share.jack.friendcircledemo.login;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +19,14 @@ import com.share.jack.friendcircledemo.login.model.UserProfile;
 import com.share.jack.friendcircledemo.login.model.UserSession;
 import com.share.jack.friendcircledemo.main.MainActivity;
 import com.share.jack.friendcircledemo.register.RegisterActivity;
+import com.share.jack.friendcircledemo.util.ConfUtil;
+
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * 登录界面
@@ -36,6 +43,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     Button alBtnLogin;
     @Bind(R.id.al_btn_register)
     Button alBtnRegister;
+    private UserProfile userProfile;
 
     public static void start(Context context) {
         CygActivity.start(context, LoginActivity.class);
@@ -70,9 +78,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     LoginModel.getInstance().execute(username, password, new CygSubscriberApi<UserProfile>(thisActivity(), true) {
                         @Override
                         protected void onBaseNext(UserProfile data) {
-                            UserSession.createUserSession(data);
-                            MainActivity.start(thisActivity());
-                            finish();
+                            userProfile = data;
+                            setJPush(data);
                         }
                     });
                 } else {
@@ -84,4 +91,49 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
         }
     }
+
+    //设置极光推送
+    private void setJPush(UserProfile data) {
+        mHandler.sendMessage(mHandler.obtainMessage(ConfUtil.MSG_SET_ALIAS, data.getAlias()));
+    }
+
+    //极光服务器设置别名是否成功的回调
+    private final TagAliasCallback tagAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tagSet) {
+            switch (code) {
+                case 0:
+                    Log.i("LoginActivity", "设置别名成功");
+                    MainActivity.start(thisActivity());
+                    UserSession.createUserSession(userProfile);
+                    finish();
+                    break;
+                case 6002:
+                    String logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Log.i(TAG, logs);
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(ConfUtil.MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    Log.i("LoginActivity", "设置别名失败");
+                    break;
+            }
+        }
+    };
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case ConfUtil.MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用JPush接口来设置别名。
+                    JPushInterface.setAliasAndTags(thisActivity(),
+                            (String) msg.obj, null, tagAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
 }

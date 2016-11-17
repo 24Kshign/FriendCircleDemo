@@ -27,7 +27,8 @@ public interface FriendApi {
      */
     @FormUrlEncoded
     @POST("LoginServlet")
-    Observable<BaseResponse<UserProfile>> login(@Field("username") String username, @Field("password") String password);
+    Observable<BaseResponse<UserProfile>> login(@Field("username") String username, @Field("password") String password
+            , @Field("alias") String alias);
 
     /**
      * 注册
@@ -59,4 +60,11 @@ public interface FriendApi {
     @FormUrlEncoded
     @POST("GetDynamicListServlet")
     Observable<BaseResponse<List<DynamicData>>> getDynamicList(@Field("userId") int id);
+
+    /**
+     * 点赞和取消点赞
+     */
+    @FormUrlEncoded
+    @POST("PraiseServlet")
+    Observable<BaseResponse<Void>> praise(@Field("isPraise") String isPraise, @FieldMap Map<String, Integer> params);
 }

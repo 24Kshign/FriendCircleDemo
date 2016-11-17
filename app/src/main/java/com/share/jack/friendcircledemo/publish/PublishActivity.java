@@ -1,6 +1,6 @@
 package com.share.jack.friendcircledemo.publish;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import com.share.jack.friendcircledemo.R;
 import com.share.jack.friendcircledemo.login.model.UserSession;
 import com.share.jack.friendcircledemo.publish.loader.GlideLoader;
 import com.share.jack.friendcircledemo.publish.model.PublishModel;
+import com.share.jack.friendcircledemo.util.ConfUtil;
 import com.share.jack.friendcircledemo.widget.CustomToolbar;
 import com.yancy.imageselector.ImageConfig;
 import com.yancy.imageselector.ImageSelector;
@@ -50,8 +51,8 @@ public class PublishActivity extends BaseActivity {
 
     private boolean isSelectPic;
 
-    public static void start(Context context) {
-        CygActivity.start(context, PublishActivity.class);
+    public static void start(Activity activity) {
+        CygActivity.startForResult(activity, PublishActivity.class, ConfUtil.RETURN_REFRESH_CODE);
     }
 
     @Override
@@ -60,11 +61,19 @@ public class PublishActivity extends BaseActivity {
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
 
+        initView();
+    }
+
+    private void initView() {
         toolbar.setMainTitle("发动态");
         toolbar.setMainTitleLeftText("返回");
         toolbar.setMainTitleLeftDrawable(R.mipmap.icon_back);
         toolbar.setTvMainTitleLeftOnClick(thisActivity());
         toolbar.setMainTitleRightText("提交");
+        initListener();
+    }
+
+    private void initListener() {
         toolbar.setTvMainTitleRightOnClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,19 +89,23 @@ public class PublishActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (!isSelectPic) {
-                    ImageConfig imageConfig = new ImageConfig.Builder(new GlideLoader())
-                            .titleBgColor(ContextCompat.getColor(thisActivity(), R.color.title_bar_background))
-                            .singleSelect()
-                            .showCamera()
-                            .crop()
-                            .filePath("/FriendCircle/images")
-                            .requestCode(REQUEST_CODE)
-                            .build();
-                    ImageSelector.open(thisActivity(), imageConfig);
-                    isSelectPic = true;
+                    openGallery();
                 }
             }
         });
+    }
+
+    private void openGallery() {
+        ImageConfig imageConfig = new ImageConfig.Builder(new GlideLoader())
+                .titleBgColor(ContextCompat.getColor(thisActivity(), R.color.title_bar_background))
+                .singleSelect()
+                .showCamera()
+                .crop()
+                .filePath("/FriendCircle/images")
+                .requestCode(REQUEST_CODE)
+                .build();
+        ImageSelector.open(thisActivity(), imageConfig);
+        isSelectPic = true;
     }
 
     private void submitPublish() {
@@ -108,10 +121,17 @@ public class PublishActivity extends BaseActivity {
         PublishModel.getInstance().execute(params, new CygSubscriberApi<Void>(thisActivity(), true) {
             @Override
             protected void onBaseNext(Void data) {
-                Toast.makeText(thisActivity(), "发布成功", Toast.LENGTH_SHORT).show();
-                finish();
+                finishActivityAndRefresh();
             }
         });
+    }
+
+    private void finishActivityAndRefresh() {
+        Intent intent = new Intent();
+        intent.putExtra("result", "true");
+        setResult(ConfUtil.RETURN_REFRESH_CODE, intent);
+        Toast.makeText(thisActivity(), "发布成功", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

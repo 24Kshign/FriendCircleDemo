@@ -1,10 +1,29 @@
 package com.share.jack.jpush;
 
+import android.util.Log;
+
+import com.share.jack.cygtool.app.CygApplication;
+
+import cn.jpush.android.api.JPushInterface;
+
 /**
- * Created by Jack on 16/11/4.
+ *
  */
 public class JPush {
 
     public JPush() {
+    }
+
+    public static void init() {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(CygApplication.getInstance());
+    }
+
+    public static String getRegistrationID() {
+        String registrationId = JPushInterface.getRegistrationID(CygApplication.getInstance());
+        if (registrationId.isEmpty()) {
+            Log.e("JPush", "获取极光注册Id失败");
+        }
+        return registrationId;
     }
 }

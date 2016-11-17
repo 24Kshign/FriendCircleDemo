@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.share.jack.cygtool.http.callback.RxBus;
+import com.share.jack.jpush.event.JPushRegistrationIdEvent;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +21,6 @@ import cn.jpush.android.api.JPushInterface;
 
 /**
  * 自定义接收器
- * Created by Jack on 16/11/04.
  */
 public class MyReceiver extends BroadcastReceiver {
 
@@ -28,7 +30,12 @@ public class MyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "收到了JPush的通知");
         Bundle bundle = intent.getExtras();
-        if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+        if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+            String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
+            Log.i(TAG, "[MyReceiver] 接收Registration Id : " + regId);
+            //send the Registration Id to your server...
+            RxBus.getInstance().post(new JPushRegistrationIdEvent(regId));
+        } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.i(TAG, "接收到推送下来的通知");
             String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
             Log.i(TAG, "title==" + title);

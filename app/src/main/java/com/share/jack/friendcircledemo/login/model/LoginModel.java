@@ -1,8 +1,12 @@
 package com.share.jack.friendcircledemo.login.model;
 
+import android.widget.Toast;
+
+import com.share.jack.cygtool.app.CygApplication;
 import com.share.jack.cygtool.http.HttpResultFunc;
 import com.share.jack.cygtool.http.NewBaseApi;
 import com.share.jack.friendcircledemo.api.FriendApi;
+import com.share.jack.jpush.JPush;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -24,7 +28,11 @@ public class LoginModel extends NewBaseApi {
     }
 
     public void execute(String username, String password, Subscriber<UserProfile> subscriber) {
-        Observable observable = mServletApi.login(username, password)
+        if (JPush.getRegistrationID().isEmpty()) {
+            Toast.makeText(CygApplication.getInstance(), "获取极光注册Id失败,请稍后登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Observable observable = mServletApi.login(username, password, JPush.getRegistrationID())
                 .map(new HttpResultFunc<UserProfile>());
         toSubscribe(observable, subscriber);
     }

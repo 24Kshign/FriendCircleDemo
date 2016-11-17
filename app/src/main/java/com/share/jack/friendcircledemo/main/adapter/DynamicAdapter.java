@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.share.jack.cygtool.http.callback.RxBus;
 import com.share.jack.cygtool.recyclerview.adapter.CygBaseRecyclerAdapter;
 import com.share.jack.friendcircledemo.R;
 import com.share.jack.friendcircledemo.main.bean.DynamicData;
+import com.share.jack.friendcircledemo.main.event.PraiseEvent;
 import com.share.jack.friendcircledemo.main.viewholder.DynamicHolder;
 
 /**
@@ -25,14 +27,13 @@ public class DynamicAdapter extends CygBaseRecyclerAdapter<DynamicData, DynamicH
     }
 
     @Override
-    public void onBindViewHolder(final DynamicHolder dynamicHolder, int position) {
+    public void onBindViewHolder(final DynamicHolder dynamicHolder, final int position) {
         super.onBindViewHolder(dynamicHolder, position);
 
         dynamicHolder.praise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dynamicHolder.praise.setSelected(true);
-                Toast.makeText(getContext(), "点击了点赞", Toast.LENGTH_SHORT).show();
+                RxBus.getInstance().post(new PraiseEvent(position));
             }
         });
 

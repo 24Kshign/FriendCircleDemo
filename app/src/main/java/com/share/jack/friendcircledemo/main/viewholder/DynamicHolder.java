@@ -49,6 +49,11 @@ public class DynamicHolder extends CygBaseViewHolder<DynamicData> {
         nickName.setText(dynamicDate.getUserProfile().getUsername());
         content.setText(dynamicDate.getContent());
         time.setText(CygTimeUtil.longToString(dynamicDate.getTime()));
+        if (dynamicDate.isPriseByCurUser()) {
+            praise.setSelected(true);
+        } else {
+            praise.setSelected(false);
+        }
         if (!dynamicDate.getImageUrl().isEmpty()) {
             image.setVisibility(View.VISIBLE);
             Glide.with(getContext()).load(dynamicDate.getImageUrl()).asBitmap()

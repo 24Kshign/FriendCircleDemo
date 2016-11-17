@@ -17,6 +17,7 @@ public class DynamicData {
     private List<CommentData> commentDataList;
     private List<PraiseData> praiseDataList;
     private Integer praiseCount;
+    private boolean isPriseByCurUser;
 
     public Integer getId() {
         return id;
@@ -80,5 +81,13 @@ public class DynamicData {
 
     public void setPraiseCount(Integer praiseCount) {
         this.praiseCount = praiseCount;
+    }
+
+    public boolean isPriseByCurUser() {
+        return isPriseByCurUser;
+    }
+
+    public void setIsPriseByCurUser(boolean isPriseByCurUser) {
+        this.isPriseByCurUser = isPriseByCurUser;
     }
 }

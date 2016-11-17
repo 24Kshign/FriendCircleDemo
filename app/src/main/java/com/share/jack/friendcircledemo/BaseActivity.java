@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * //  ┏┓　　　┏┓
  * //┏┛┻━━━┛┻┓
@@ -44,5 +46,17 @@ public class BaseActivity extends Activity {
             getWindow().setStatusBarColor(statusBarColor);
             getWindow().setNavigationBarColor(navigationBarColor);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
     }
 }

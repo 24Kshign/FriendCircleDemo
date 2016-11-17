@@ -46,4 +46,31 @@ public class CygActivity {
     public static void start(Context context, Class<? extends Activity> cls) {
         start(context, cls, null, DEFAULT_FLAGS);
     }
+
+    ////////////////////////////////////////
+    // startActivityForResult
+
+    public static void startForResult(Activity activity, Intent intent, int requestCode) {
+        try {
+            activity.startActivityForResult(intent, requestCode);
+        } catch (Exception e) {
+            Log.e(TAG, "error");
+        }
+    }
+
+    public static void startForResult(Activity activity, Class<? extends Activity> cls, Bundle extras, int flags, int requestCode) {
+        startForResult(activity, newIntent(activity, cls, extras, flags), requestCode);
+    }
+
+    public static void startForResult(Activity activity, Class<? extends Activity> cls, Bundle extras, int requestCode) {
+        startForResult(activity, cls, extras, DEFAULT_FLAGS, requestCode);
+    }
+
+    public static void startForResult(Activity activity, Class<? extends Activity> cls, int flags, int requestCode) {
+        startForResult(activity, cls, null, flags, requestCode);
+    }
+
+    public static void startForResult(Activity activity, Class<? extends Activity> cls, int requestCode) {
+        startForResult(activity, cls, null, DEFAULT_FLAGS, requestCode);
+    }
 }
