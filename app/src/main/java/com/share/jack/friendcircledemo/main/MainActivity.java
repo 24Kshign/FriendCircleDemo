@@ -22,6 +22,7 @@ import com.share.jack.friendcircledemo.main.model.MainModel;
 import com.share.jack.friendcircledemo.main.model.PraiseModel;
 import com.share.jack.friendcircledemo.publish.PublishActivity;
 import com.share.jack.friendcircledemo.widget.CustomToolbar;
+import com.share.jack.jpush.event.JPushAutoRefresh;
 
 import java.util.List;
 
@@ -100,6 +101,14 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
                                         mAdapter.notifyDataSetChanged();
                                     }
                                 });
+                    }
+                });
+
+        RxBus.getInstance().toObserverable(JPushAutoRefresh.class)
+                .subscribe(new Action1<JPushAutoRefresh>() {
+                    @Override
+                    public void call(JPushAutoRefresh jPushAutoRefresh) {
+                        refreshData();
                     }
                 });
     }
