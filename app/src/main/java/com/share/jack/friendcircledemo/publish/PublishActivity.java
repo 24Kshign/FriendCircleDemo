@@ -27,6 +27,7 @@ import com.yancy.imageselector.ImageSelector;
 import com.yancy.imageselector.ImageSelectorActivity;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,10 +115,11 @@ public class PublishActivity extends BaseActivity {
         if (pathList != null && pathList.size() > 0) {
             image = BitmapUtil.bitmapToBase64(BitmapFactory.decodeFile(pathList.get(0)));
         }
-        Map<String, String> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("userId", String.valueOf(UserSession.getUserProfile().getId()));
         params.put("content", content);
         params.put("image", image);
+        params.put("createTime", new Date().getTime());
         PublishModel.getInstance().execute(params, new CygSubscriberApi<Void>(thisActivity(), true) {
             @Override
             protected void onBaseNext(Void data) {

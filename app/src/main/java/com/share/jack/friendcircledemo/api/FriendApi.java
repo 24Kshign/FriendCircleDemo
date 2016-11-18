@@ -49,7 +49,7 @@ public interface FriendApi {
      */
     @FormUrlEncoded
     @POST("PublishServlet")
-    Observable<BaseResponse<Void>> publish(@FieldMap Map<String, String> params);
+    Observable<BaseResponse<Void>> publish(@FieldMap Map<String, Object> params);
 
     /**
      * 获取动态列表
@@ -67,4 +67,8 @@ public interface FriendApi {
     @FormUrlEncoded
     @POST("PraiseServlet")
     Observable<BaseResponse<Void>> praise(@Field("isPraise") String isPraise, @FieldMap Map<String, Integer> params);
+
+    @FormUrlEncoded
+    @POST("CommentServlet")
+    Observable<BaseResponse<Void>> comment(@FieldMap Map<String, Object> params);
 }

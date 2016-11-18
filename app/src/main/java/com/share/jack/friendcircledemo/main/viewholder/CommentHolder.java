@@ -8,7 +8,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.share.jack.cygtool.recyclerview.holder.CygBaseViewHolder;
@@ -25,7 +25,7 @@ public class CommentHolder extends CygBaseViewHolder<CommentData> {
     public TextView nickName;
     public TextView content;
     public TextView time;
-    public LinearLayout lvNick;
+    public RelativeLayout rcMain;
 
     public CommentHolder(ViewGroup parent, @LayoutRes int layoutId) {
         super(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false));
@@ -33,7 +33,7 @@ public class CommentHolder extends CygBaseViewHolder<CommentData> {
         nickName = getView(R.id.ic_tv_nick_name);
         content = getView(R.id.ic_tv_content);
         time = getView(R.id.ic_tv_time);
-        lvNick = getView(R.id.ic_lv_nick);
+        rcMain = getView(R.id.ic_rv_main);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CommentHolder extends CygBaseViewHolder<CommentData> {
             nickName.setText(commentData.getFromName());
         }
         content.setText(commentData.getContent());
-        time.setText(CygTimeUtil.longToString(commentData.getTime()));
+        time.setText(CygTimeUtil.getTimeByLong(commentData.getTime()));
     }
 
     private SpannableString getSpannString(String str) {

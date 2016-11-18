@@ -8,15 +8,26 @@
         android:id="@+id/am_titlebar"
         layout="@layout/layout_title_bar" />
 
-    <com.share.jack.friendcircledemo.widget.AutoSwipeRefreshLayout
-        android:id="@+id/am_refresh_layout"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.share.jack.cygtool.recyclerview.MyRecyclerView
             android:id="@+id/am_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.share.jack.friendcircledemo.widget.AutoSwipeRefreshLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/am_titlebar" />
 
+        <RelativeLayout
+            android:id="@+id/am_rv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:visibility="gone">
+
+            <include layout="@layout/layout_comment" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
 </LinearLayout>

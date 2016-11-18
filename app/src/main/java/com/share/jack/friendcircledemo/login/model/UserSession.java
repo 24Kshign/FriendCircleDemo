@@ -12,10 +12,12 @@ public class UserSession {
         return SharePreferenceUtil.getBoolean(ConfUtil.LOGIN_INFO, ConfUtil.SHARE_IS_LOGIN, false);
     }
 
+    private static UserProfile userProfile;
+
     public static void createUserSession(UserProfile data) {
         SharePreferenceUtil.setBoolean(ConfUtil.LOGIN_INFO, ConfUtil.SHARE_IS_LOGIN, true);
         SharePreferenceUtil.setInt(ConfUtil.LOGIN_INFO, ConfUtil.USER_ID, data.getId());
-        SharePreferenceUtil.setString(ConfUtil.USER_NAME, ConfUtil.USER_NAME, data.getUsername());
+        SharePreferenceUtil.setString(ConfUtil.LOGIN_INFO, ConfUtil.USER_NAME, data.getUsername());
     }
 
     public static void destroyUserSession() {
@@ -23,7 +25,9 @@ public class UserSession {
     }
 
     public static UserProfile getUserProfile() {
-        UserProfile userProfile = new UserProfile();
+        if (userProfile == null) {
+            userProfile = new UserProfile();
+        }
         userProfile.setId(SharePreferenceUtil.getInt(ConfUtil.LOGIN_INFO, ConfUtil.USER_ID, -1));
         userProfile.setUsername(SharePreferenceUtil.getString(ConfUtil.LOGIN_INFO, ConfUtil.USER_NAME, "24K纯帅"));
         return userProfile;

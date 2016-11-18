@@ -48,7 +48,7 @@ public class DynamicHolder extends CygBaseViewHolder<DynamicData> {
         avatar.setImageResource(R.mipmap.icon_avatar_from);
         nickName.setText(dynamicDate.getUserProfile().getUsername());
         content.setText(dynamicDate.getContent());
-        time.setText(CygTimeUtil.longToString(dynamicDate.getTime()));
+        time.setText(CygTimeUtil.getStandardDate(dynamicDate.getTime()));
         if (dynamicDate.isPriseByCurUser()) {
             praise.setSelected(true);
         } else {
@@ -61,10 +61,12 @@ public class DynamicHolder extends CygBaseViewHolder<DynamicData> {
                     .error(R.mipmap.ic_launcher).into(image);
         }
         if (dynamicDate.getCommentDataList() != null) {
-            adapter = new CommentAdapter(getContext(), null);
+            adapter = new CommentAdapter(getContext());
+            recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             adapter.setDataList(dynamicDate.getCommentDataList());
             recyclerView.setAdapter(adapter);
         }
+
     }
 }

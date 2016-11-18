@@ -84,6 +84,13 @@ public abstract class CygBaseRecyclerAdapter<DATA, VH extends CygBaseViewHolder<
         setDataList(dataList, true);
     }
 
+    public List<DATA> getDataList() {
+        if (mDataList == null) {
+            mDataList = new ArrayList<>();
+        }
+        return mDataList;
+    }
+
     /**
      * 更新局部数据
      *

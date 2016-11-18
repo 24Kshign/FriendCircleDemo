@@ -3,8 +3,6 @@ package com.share.jack.cygtool.http.convert;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
-import com.share.jack.cygtool.http.ApiException;
-import com.share.jack.cygtool.http.BaseResponse;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -20,7 +18,7 @@ import retrofit2.Converter;
 /**
  *
  */
-public class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody,T> {
+public class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
 
     private final Gson gson;
     private final TypeAdapter<T> adapter;
@@ -34,11 +32,6 @@ public class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBod
     @Override
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
-        BaseResponse baseResponse=gson.fromJson(response,BaseResponse.class);
-        if (baseResponse.isCodeInvalid()) {
-            value.close();
-            throw new ApiException(baseResponse.getCode(), baseResponse.getMsg());
-        }
         MediaType contentType = value.contentType();
         Charset charset = contentType != null ? contentType.charset(UTF_8) : UTF_8;
         InputStream inputStream = new ByteArrayInputStream(response.getBytes());

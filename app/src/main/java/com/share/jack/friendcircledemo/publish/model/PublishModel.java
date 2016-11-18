@@ -25,7 +25,7 @@ public class PublishModel extends NewBaseApi {
         return getPresent(PublishModel.class);
     }
 
-    public void execute(Map<String, String> params, Subscriber<Void> subscriber){
+    public void execute(Map<String, Object> params, Subscriber<Void> subscriber){
         Observable observable = mServletApi.publish(params)
                 .map(new HttpResultFunc<Void>());
         toSubscribe(observable, subscriber);

@@ -73,9 +73,29 @@ public class CygTimeUtil {
         return day + "";
     }
 
-    public static String longToString(Long t) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public static String longToString(Long t, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(new Date(t));
+    }
+
+    private static int[] getHourAndMinuteByLongTime(long t) {
+        int[] time = new int[2];
+        time[0] = Integer.valueOf(longToString(t, "HH"));
+        time[1] = Integer.valueOf(longToString(t, "mm"));
+        return time;
+    }
+
+    public static String getTimeByLong(long t) {
+        int hour = getHourAndMinuteByLongTime(t)[0];// 获取小时
+        int minute = getHourAndMinuteByLongTime(t)[1];// 获取分钟
+        int minuteOfDay = hour * 60 + minute;// 从0:00分开始到目前为止的分钟数
+        final int start = 0 * 60;// 起始时间 00:20的分钟数
+        final int end = 24 * 60;// 结束时间 8:00的分钟数
+        if (minuteOfDay >= start && minuteOfDay <= end) {
+            return longToString(t, "HH:mm");
+        } else {
+            return longToString(t, "yyyy-MM-dd");
+        }
     }
 
     /**
@@ -86,11 +106,11 @@ public class CygTimeUtil {
      */
     public static String getStandardDate(Long t) {
         StringBuffer sb = new StringBuffer();
-        long time = System.currentTimeMillis() - (t * 1000);
-        long mill = (long) Math.ceil(time / 1000);//秒前
-        long minute = (long) Math.ceil(time / 60 / 1000.0f);// 分钟前
-        long hour = (long) Math.ceil(time / 60 / 60 / 1000.0f);// 小时
-        long day = (long) Math.ceil(time / 24 / 60 / 60 / 1000.0f);// 天前
+        long time = System.currentTimeMillis() - t;
+        long mill = (long) Math.ceil(time / 1000); //秒前   (除以一秒)
+        long minute = (long) Math.ceil(time / 60 / 1000.0f);// 分钟前   (除以一分钟)
+        long hour = (long) Math.ceil(time / 60 / 60 / 1000.0f);// 小时  (除以一小时)
+        long day = (long) Math.ceil(time / 24 / 60 / 60 / 1000.0f);// 天前   (除以一天)
         if (day - 1 > 0) {
             sb.append(day + "天");
         } else if (hour - 1 > 0) {
