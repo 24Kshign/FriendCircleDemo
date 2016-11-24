@@ -24,6 +24,7 @@ import com.share.jack.friendcircledemo.login.model.UserSession;
 import com.share.jack.friendcircledemo.main.adapter.DynamicAdapter;
 import com.share.jack.friendcircledemo.main.bean.CommentData;
 import com.share.jack.friendcircledemo.main.bean.DynamicData;
+import com.share.jack.friendcircledemo.main.bean.PraiseData;
 import com.share.jack.friendcircledemo.main.event.CommentEvent;
 import com.share.jack.friendcircledemo.main.event.PraiseEvent;
 import com.share.jack.friendcircledemo.main.model.CommentModel;
@@ -33,6 +34,7 @@ import com.share.jack.friendcircledemo.publish.PublishActivity;
 import com.share.jack.friendcircledemo.widget.CustomToolbar;
 import com.share.jack.jpush.event.JPushAutoRefresh;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -120,7 +122,7 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
                 commentData.setFromName(UserSession.getUserProfile().getUsername());
                 commentData.setToName(data.getUserProfile().getUsername());
                 commentData.setToUserId(data.getUserProfile().getId());
-                commentDataList.add(0, commentData);
+                commentDataList.add(commentData);
                 data.setCommentDataList(commentDataList);
                 mAdapter.updateItem(articlePosition, data);
                 commitComment(commentData);
@@ -224,16 +226,33 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
                         mAdapter.getItem(praiseEvent.getPosition()).getUserProfile().getId(), new CygSubscriberApi<Void>(thisActivity(), false) {
                             @Override
                             protected void onBaseNext(Void data) {
+                                DynamicData dynamicData = mAdapter.getItem(praiseEvent.getPosition());
+                                List<PraiseData> praiseList = dynamicData.getPraiseDataList();
                                 if (!isPraise) {
                                     Toast.makeText(MainActivity.this, "您是第" + (dynamicData.getPraiseCount() + 1) + "个点赞的", Toast.LENGTH_SHORT).show();
                                     mAdapter.getItem(praiseEvent.getPosition()).setPraiseCount(dynamicData.getPraiseCount() + 1);
+                                    if (praiseList == null) {
+                                        praiseList = new ArrayList<>();
+                                    }
+                                    PraiseData praiseData = new PraiseData();
+                                    praiseData.setPraiseUserId(UserSession.getUserProfile().getId());
+                                    praiseData.setPraiseName(UserSession.getUserProfile().getUsername());
+                                    praiseList.add(praiseData);
+
                                 } else {
                                     Toast.makeText(MainActivity.this, "您前面还有" + (dynamicData.getPraiseCount() - 1) + "个人点赞", Toast.LENGTH_SHORT).show();
                                     mAdapter.getItem(praiseEvent.getPosition()).setPraiseCount(dynamicData.getPraiseCount() - 1);
+                                    for (PraiseData praiseData : praiseList) {
+                                        if (praiseData.getPraiseUserId() == UserSession.getUserProfile().getId()) {
+                                            praiseList.remove(praiseData);
+                                            break;
+                                        }
+                                    }
                                 }
-                                DynamicData dynamicData = mAdapter.getItem(praiseEvent.getPosition());
+                                dynamicData.setPraiseDataList(praiseList);
                                 dynamicData.setIsPriseByCurUser(!isPraise);
                                 mAdapter.updateItem(praiseEvent.getPosition(), dynamicData);
+                                refreshData();
                             }
                         });
             }

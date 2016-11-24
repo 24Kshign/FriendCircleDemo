@@ -21,6 +21,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="4dp"
+        android:textColorHint="@color/color_gray"
         android:hint="来了说点什么吧...."
         android:textSize="15dp" />
 

@@ -78,20 +78,24 @@ public class CygTimeUtil {
         return sdf.format(new Date(t));
     }
 
-    private static int[] getHourAndMinuteByLongTime(long t) {
-        int[] time = new int[2];
-        time[0] = Integer.valueOf(longToString(t, "HH"));
-        time[1] = Integer.valueOf(longToString(t, "mm"));
+    private static int[] getDateByLongTime(long t) {
+        int[] time = new int[5];
+        time[0] = Integer.valueOf(longToString(t, "yyyy"));
+        time[1] = Integer.valueOf(longToString(t, "MM"));
+        time[2] = Integer.valueOf(longToString(t, "dd"));
         return time;
     }
 
     public static String getTimeByLong(long t) {
-        int hour = getHourAndMinuteByLongTime(t)[0];// 获取小时
-        int minute = getHourAndMinuteByLongTime(t)[1];// 获取分钟
-        int minuteOfDay = hour * 60 + minute;// 从0:00分开始到目前为止的分钟数
-        final int start = 0 * 60;// 起始时间 00:20的分钟数
-        final int end = 24 * 60;// 结束时间 8:00的分钟数
-        if (minuteOfDay >= start && minuteOfDay <= end) {
+        int year = getDateByLongTime(t)[0];
+        int monthOfYear = getDateByLongTime(t)[1];
+        int dayOfMonth = getDateByLongTime(t)[2];
+
+        int yearEnd = getDateByLongTime(System.currentTimeMillis())[0];
+        int monthOfYearEnd = getDateByLongTime(System.currentTimeMillis())[1];
+        int dayOfMonthEnd = getDateByLongTime(System.currentTimeMillis())[2];
+
+        if (year == yearEnd && monthOfYear == monthOfYearEnd && dayOfMonth == dayOfMonthEnd) {
             return longToString(t, "HH:mm");
         } else {
             return longToString(t, "yyyy-MM-dd");

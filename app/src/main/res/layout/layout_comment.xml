@@ -40,6 +40,7 @@
         android:layout_toLeftOf="@+id/lc_btn_send"
         android:background="@null"
         android:hint="说点什么吧..."
+        android:textColorHint="@color/color_gray"
         android:lines="2"
         android:paddingRight="8dp"
         android:singleLine="true"

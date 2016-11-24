@@ -38,10 +38,11 @@ public class CommentHolder extends CygBaseViewHolder<CommentData> {
 
     @Override
     public void setData(CommentData commentData) {
-        avatar.setImageResource(R.mipmap.icon_avatar_to);
         if (!commentData.isRootComment()) {
+            avatar.setImageResource(R.mipmap.icon_avatar_man);
             nickName.setText(getSpannString(commentData.getFromName() + "回复" + commentData.getToName()));
         } else {
+            avatar.setImageResource(R.mipmap.icon_avatar_woman);
             nickName.setText(commentData.getFromName());
         }
         content.setText(commentData.getContent());

@@ -11,4 +11,11 @@
 
     <color name="color_send_normal">#7cb324</color>
     <color name="color_send_pressed">#548321</color>
+    <color name="im_line_color">#dadada</color>
+    <color name="praise_item_default">#333333</color>
+    <color name="praise_item_selector_default">#cccccc</color>
+    <color name="praise_item">#8290AF</color>
+    <color name="default_clickable_color">#cccccc</color>
+    <color name="color_spannable_pressed">#8290AF</color>
+    <color name="transparent">#00000000</color>
 </resources>

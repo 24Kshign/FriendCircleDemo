@@ -90,4 +90,18 @@ public class DynamicData {
     public void setIsPriseByCurUser(boolean isPriseByCurUser) {
         this.isPriseByCurUser = isPriseByCurUser;
     }
+
+    public boolean hasPraise(){
+        if(praiseDataList!=null && praiseDataList.size()>0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasComment(){
+        if(commentDataList!=null && commentDataList.size()>0){
+            return true;
+        }
+        return false;
+    }
 }
