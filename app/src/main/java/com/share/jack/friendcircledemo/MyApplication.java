@@ -14,7 +14,7 @@ public class MyApplication extends CygApplication {
         super.onCreate();
         JPush.init();
 //        HttpServletAddress.getInstance().setOnlineAddress("http://192.168.1.103:8080/FriendCircle/");
-        HttpServletAddress.getInstance().setOnlineAddress("http://192.168.1.100:8080/FriendCircle/");
+        HttpServletAddress.getInstance().setOnlineAddress("http://192.168.1.102:8080/FriendCircle/");
 //        HttpServletAddress.getInstance().setOnlineAddress("http://192.168.1.103:8080/FriendCircle/");
     }
 }
