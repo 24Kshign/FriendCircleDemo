@@ -17,7 +17,7 @@ public class SharePreferenceUtil {
     }
 
     public static void clearSharePreference(String name) {
-        getSharedPreferences(name).edit().clear();
+        getSharedPreferences(name).edit().clear().commit();
     }
 
 

@@ -9,13 +9,13 @@ import com.share.jack.friendcircledemo.util.ConfUtil;
 public class UserSession {
 
     public static boolean isLogin() {
-        return SharePreferenceUtil.getBoolean(ConfUtil.LOGIN_INFO, ConfUtil.SHARE_IS_LOGIN, false);
+        return SharePreferenceUtil.getBoolean(ConfUtil.LOGIN_INFO, ConfUtil.USER_IS_LOGIN, false);
     }
 
     private static UserProfile userProfile;
 
     public static void createUserSession(UserProfile data) {
-        SharePreferenceUtil.setBoolean(ConfUtil.LOGIN_INFO, ConfUtil.SHARE_IS_LOGIN, true);
+        SharePreferenceUtil.setBoolean(ConfUtil.LOGIN_INFO, ConfUtil.USER_IS_LOGIN, true);
         SharePreferenceUtil.setInt(ConfUtil.LOGIN_INFO, ConfUtil.USER_ID, data.getId());
         SharePreferenceUtil.setString(ConfUtil.LOGIN_INFO, ConfUtil.USER_NAME, data.getUsername());
     }

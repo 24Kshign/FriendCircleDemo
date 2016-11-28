@@ -260,11 +260,6 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
     }
 
     @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
             if (data.getStringExtra("result").equals("true")) {

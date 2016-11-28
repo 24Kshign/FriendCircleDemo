@@ -14,10 +14,10 @@ import com.share.jack.cygtool.util.CygActivity;
 import com.share.jack.cygtool.util.CygStringUtil;
 import com.share.jack.friendcircledemo.BaseActivity;
 import com.share.jack.friendcircledemo.R;
+import com.share.jack.friendcircledemo.SettingActivity;
 import com.share.jack.friendcircledemo.login.model.LoginModel;
 import com.share.jack.friendcircledemo.login.model.UserProfile;
 import com.share.jack.friendcircledemo.login.model.UserSession;
-import com.share.jack.friendcircledemo.main.MainActivity;
 import com.share.jack.friendcircledemo.register.RegisterActivity;
 import com.share.jack.friendcircledemo.util.ConfUtil;
 
@@ -104,7 +104,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             switch (code) {
                 case 0:
                     Log.i("LoginActivity", "设置别名成功");
-                    MainActivity.start(thisActivity());
+                    SettingActivity.start(thisActivity());
                     UserSession.createUserSession(userProfile);
                     finish();
                     break;

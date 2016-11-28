@@ -5,7 +5,6 @@ import android.os.Handler;
 
 import com.share.jack.friendcircledemo.login.LoginActivity;
 import com.share.jack.friendcircledemo.login.model.UserSession;
-import com.share.jack.friendcircledemo.main.MainActivity;
 
 /**
  * 欢迎界面
@@ -26,8 +25,7 @@ public class FirstActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 if (UserSession.isLogin()) {
-                    MainActivity.start(thisActivity());
-//                    TestActivity.start(thisActivity());
+                    SettingActivity.start(thisActivity());
                 } else {
                     LoginActivity.start(thisActivity());
                 }
