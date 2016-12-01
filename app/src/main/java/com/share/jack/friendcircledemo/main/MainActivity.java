@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
     }
 
     private void commitComment(CommentData commentData) {
-        CommentModel.getInstance().execute(mAdapter.getItem(articlePosition).getId(), commentData, new CygSubscriberApi<Void>(thisActivity(), false) {
+        CommentModel.getInstance().execute(mAdapter.getItem(articlePosition).getId(), commentData, new CygSubscriberApi<Void>(thisActivity()) {
             @Override
             protected void onBaseNext(Void data) {
                 Toast.makeText(MainActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
@@ -223,7 +223,7 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
                 final boolean isPraise = mAdapter.getItem(praiseEvent.getPosition()).isPriseByCurUser();
                 final DynamicData dynamicData = mAdapter.getItem(praiseEvent.getPosition());
                 PraiseModel.getInstance().execute(String.valueOf(isPraise), dynamicData.getId(), UserSession.getUserProfile().getId(),
-                        mAdapter.getItem(praiseEvent.getPosition()).getUserProfile().getId(), new CygSubscriberApi<Void>(thisActivity(), false) {
+                        mAdapter.getItem(praiseEvent.getPosition()).getUserProfile().getId(), new CygSubscriberApi<Void>(thisActivity()) {
                             @Override
                             protected void onBaseNext(Void data) {
                                 DynamicData dynamicData = mAdapter.getItem(praiseEvent.getPosition());
@@ -285,7 +285,7 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
     }
 
     private void refreshData() {
-        MainModel.getInstance().execute(UserSession.getUserProfile().getId(), new CygSubscriberApi<List<DynamicData>>(thisActivity(), false) {
+        MainModel.getInstance().execute(UserSession.getUserProfile().getId(), new CygSubscriberApi<List<DynamicData>>(thisActivity()) {
             @Override
             protected void onBaseNext(List<DynamicData> data) {
                 mAdapter.setDataList(data);

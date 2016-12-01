@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.share.jack.cygtool.http.ApiException;
+import com.share.jack.cygtool.util.CygStringUtil;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -22,20 +23,39 @@ public abstract class CygSubscriberApi<T> extends BaseSubscriber<T> {
 
     private boolean isNeedProgress;
     private Activity activity;
+    private String titleMsg;
 
-    public CygSubscriberApi(Activity activity, boolean isNeedProgress) {
-        super(activity);
-        this.activity = activity;
-        this.isNeedProgress = isNeedProgress;
+    public CygSubscriberApi(Activity activity) {
+        this(activity, null);
     }
 
-    public CygSubscriberApi(Fragment fragment, boolean isNeedProgress) {
-        this(fragment.getActivity(), isNeedProgress);
+    public CygSubscriberApi(Activity activity, String titleMsg) {
+        super(activity);
+        this.activity = activity;
+        this.titleMsg = titleMsg;
+        if (CygStringUtil.isEmpty(titleMsg)) {
+            this.isNeedProgress = false;
+        } else {
+            this.isNeedProgress = true;
+        }
+    }
+
+    public CygSubscriberApi(Fragment fragment, String titleMsg) {
+        this(fragment.getActivity(), titleMsg);
+    }
+
+    public CygSubscriberApi(Fragment fragment) {
+        this(fragment.getActivity(), null);
     }
 
     @Override
     protected boolean isNeedProgressDialog() {
         return isNeedProgress;
+    }
+
+    @Override
+    protected String getTitleMsg() {
+        return titleMsg;
     }
 
     @Override

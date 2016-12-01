@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
+import com.share.jack.cygtool.util.CygStringUtil;
+
 /**
  * 显示dialog的handler
  */
@@ -28,12 +30,14 @@ public class ProgressDialogHandler extends Handler {
         this.cancelable = cancelable;
     }
 
-    private void initProgressDialog() {
+    private void initProgressDialog(String title) {
         if (pd == null) {
             pd = new ProgressDialog(activity);
-            pd.setMessage("加载中...");
+            if (CygStringUtil.isEmpty(title)) {
+                title = "加载中,请稍后....";
+            }
+            pd.setMessage(title);
             pd.setCancelable(cancelable);
-
             if (cancelable) {
                 pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
@@ -60,7 +64,8 @@ public class ProgressDialogHandler extends Handler {
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case SHOW_PROGRESS_DIALOG:
-                initProgressDialog();
+                String title = (String) msg.obj;
+                initProgressDialog(title);
                 break;
             case DISMISS_PROGRESS_DIALOG:
                 dismissProgressDialog();

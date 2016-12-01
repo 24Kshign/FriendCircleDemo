@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.al_btn_login:
                 if (!username.isEmpty() && !password.isEmpty()) {
-                    LoginModel.getInstance().execute(username, password, new CygSubscriberApi<UserProfile>(thisActivity(), true) {
+                    LoginModel.getInstance().execute(username, password, new CygSubscriberApi<UserProfile>(thisActivity(), "登录中,请稍后....") {
                         @Override
                         protected void onBaseNext(UserProfile data) {
                             userProfile = data;

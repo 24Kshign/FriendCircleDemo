@@ -120,7 +120,7 @@ public class PublishActivity extends BaseActivity {
         params.put("content", content);
         params.put("image", image);
         params.put("createTime", new Date().getTime());
-        PublishModel.getInstance().execute(params, new CygSubscriberApi<Void>(thisActivity(), true) {
+        PublishModel.getInstance().execute(params, new CygSubscriberApi<Void>(thisActivity()) {
             @Override
             protected void onBaseNext(Void data) {
                 finishActivityAndRefresh();

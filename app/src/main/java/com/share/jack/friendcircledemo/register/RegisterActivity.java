@@ -51,7 +51,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         String username = CygStringUtil.getEditTextContent(arEtUsername);
         String password = CygStringUtil.getEditTextContent(arEtPassword);
         if (!username.isEmpty() && !password.isEmpty()) {
-            RegisterModel.getInstance().execute(username, password, new CygSubscriberApi<Void>(thisActivity(), true) {
+            RegisterModel.getInstance().execute(username, password, new CygSubscriberApi<Void>(thisActivity(), "正在注册,请稍后...") {
                 @Override
                 protected void onBaseNext(Void data) {
                     Toast.makeText(RegisterActivity.this, "注册成功,请登录", Toast.LENGTH_SHORT).show();

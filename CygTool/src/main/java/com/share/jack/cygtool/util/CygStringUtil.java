@@ -1,5 +1,6 @@
 package com.share.jack.cygtool.util;
 
+import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 /**
@@ -17,5 +18,9 @@ public class CygStringUtil {
             return ((TextView) object).getText().toString();
         }
         return EMPTY_CONTENT;
+    }
+
+    public static boolean isEmpty(@Nullable String string) {
+        return string == null || string.isEmpty();
     }
 }

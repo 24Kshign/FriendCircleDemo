@@ -22,6 +22,8 @@ public abstract class BaseSubscriber<T> extends Subscriber<T> implements Progres
 
     protected abstract boolean isNeedProgressDialog();
 
+    protected abstract String getTitleMsg();
+
     private ProgressDialogHandler mProgressDialogHandler;
     private Activity activity;
 
@@ -32,16 +34,18 @@ public abstract class BaseSubscriber<T> extends Subscriber<T> implements Progres
 
     private void showProgressDialog() {
         if (mProgressDialogHandler != null) {
-            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG).sendToTarget();
+            mProgressDialogHandler.obtainMessage(ProgressDialogHandler.SHOW_PROGRESS_DIALOG, getTitleMsg()).sendToTarget();
         }
     }
 
-    private void dismissProgressDialog() {
+    protected void dismissProgressDialog() {
         if (mProgressDialogHandler != null) {
             mProgressDialogHandler.obtainMessage(ProgressDialogHandler.DISMISS_PROGRESS_DIALOG).sendToTarget();
             mProgressDialogHandler = null;
         }
     }
+
+
 
     @Override
     public void onError(Throwable t) {
