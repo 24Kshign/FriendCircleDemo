@@ -4,8 +4,7 @@ import android.widget.Toast;
 
 import com.share.jack.cygtool.app.CygApplication;
 import com.share.jack.cygtool.http.HttpResultFunc;
-import com.share.jack.cygtool.http.NewBaseApi;
-import com.share.jack.friendcircledemo.api.FriendApi;
+import com.share.jack.friendcircledemo.api.BaseModel;
 import com.share.jack.jpush.JPush;
 
 import rx.Observable;
@@ -14,14 +13,8 @@ import rx.Subscriber;
 /**
  *
  */
-public class LoginModel extends NewBaseApi {
+public class LoginModel extends BaseModel {
 
-    private FriendApi mServletApi;
-
-    public LoginModel() {
-        super();
-        mServletApi = mRetrofit.create(FriendApi.class);
-    }
 
     public static LoginModel getInstance() {
         return getPresent(LoginModel.class);

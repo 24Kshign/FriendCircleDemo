@@ -1,8 +1,7 @@
 package com.share.jack.friendcircledemo.main.model;
 
 import com.share.jack.cygtool.http.HttpResultFunc;
-import com.share.jack.cygtool.http.NewBaseApi;
-import com.share.jack.friendcircledemo.api.FriendApi;
+import com.share.jack.friendcircledemo.api.BaseModel;
 import com.share.jack.friendcircledemo.main.bean.CommentData;
 
 import java.util.HashMap;
@@ -14,14 +13,7 @@ import rx.Subscriber;
 /**
  *
  */
-public class CommentModel extends NewBaseApi {
-
-    private FriendApi mServletApi;
-
-    public CommentModel() {
-        super();
-        mServletApi = mRetrofit.create(FriendApi.class);
-    }
+public class CommentModel extends BaseModel {
 
     public static CommentModel getInstance() {
         return getPresent(CommentModel.class);

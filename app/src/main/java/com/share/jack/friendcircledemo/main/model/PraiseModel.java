@@ -1,8 +1,7 @@
 package com.share.jack.friendcircledemo.main.model;
 
 import com.share.jack.cygtool.http.HttpResultFunc;
-import com.share.jack.cygtool.http.NewBaseApi;
-import com.share.jack.friendcircledemo.api.FriendApi;
+import com.share.jack.friendcircledemo.api.BaseModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,14 +12,7 @@ import rx.Subscriber;
 /**
  *
  */
-public class PraiseModel extends NewBaseApi {
-
-    private FriendApi mServletApi;
-
-    public PraiseModel() {
-        super();
-        mServletApi = mRetrofit.create(FriendApi.class);
-    }
+public class PraiseModel extends BaseModel {
 
     public static PraiseModel getInstance() {
         return getPresent(PraiseModel.class);
