@@ -42,6 +42,9 @@
         <activity
             android:name=".SettingActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".photoview.PhotoViewActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

@@ -26,10 +26,12 @@ import com.share.jack.friendcircledemo.main.bean.CommentData;
 import com.share.jack.friendcircledemo.main.bean.DynamicData;
 import com.share.jack.friendcircledemo.main.bean.PraiseData;
 import com.share.jack.friendcircledemo.main.event.CommentEvent;
+import com.share.jack.friendcircledemo.main.event.ImageEvent;
 import com.share.jack.friendcircledemo.main.event.PraiseEvent;
 import com.share.jack.friendcircledemo.main.model.CommentModel;
 import com.share.jack.friendcircledemo.main.model.MainModel;
 import com.share.jack.friendcircledemo.main.model.PraiseModel;
+import com.share.jack.friendcircledemo.photoview.PhotoViewActivity;
 import com.share.jack.friendcircledemo.publish.PublishActivity;
 import com.share.jack.friendcircledemo.widget.CustomToolbar;
 import com.share.jack.jpush.event.JPushAutoRefresh;
@@ -144,6 +146,18 @@ public class MainActivity extends BaseActivity implements XRecyclerView.LoadingL
         monitorComment();
 
         monitorRefresh();
+
+        monitorImage();
+    }
+
+    private void monitorImage() {
+        RxBus.getInstance().toObserverable(ImageEvent.class)
+                .subscribe(new Action1<ImageEvent>() {
+                    @Override
+                    public void call(ImageEvent imageEvent) {
+                        PhotoViewActivity.start(thisActivity(), mAdapter.getDataList().get(imageEvent.getPosition()).getImageUrl());
+                    }
+                });
     }
 
     private void monitorRefresh() {

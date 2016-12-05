@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 /**
- * Created by Jack on 16/11/11.
+ *
  */
 public class GlideLoader implements com.yancy.imageselector.ImageLoader {
 
