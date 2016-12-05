@@ -9,9 +9,9 @@ import com.share.jack.cygtool.recyclerview.adapter.CygBaseRecyclerAdapter;
 import com.share.jack.friendcircledemo.R;
 import com.share.jack.friendcircledemo.main.bean.DynamicData;
 import com.share.jack.friendcircledemo.main.event.CommentEvent;
-import com.share.jack.friendcircledemo.main.event.ImageEvent;
 import com.share.jack.friendcircledemo.main.event.PraiseEvent;
 import com.share.jack.friendcircledemo.main.viewholder.DynamicHolder;
+import com.share.jack.friendcircledemo.photoview.PhotoViewActivity;
 
 /**
  *
@@ -44,10 +44,11 @@ public class DynamicAdapter extends CygBaseRecyclerAdapter<DynamicData, DynamicH
                 RxBus.getInstance().post(new CommentEvent(position, true));
             }
         });
+
         dynamicHolder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxBus.getInstance().post(new ImageEvent(position));
+                PhotoViewActivity.start(getContext(), getDataList().get(position).getImageUrl());
             }
         });
     }
