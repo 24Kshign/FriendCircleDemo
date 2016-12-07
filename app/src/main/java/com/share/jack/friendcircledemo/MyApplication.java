@@ -2,6 +2,7 @@ package com.share.jack.friendcircledemo;
 
 import com.share.jack.cygtool.app.CygApplication;
 import com.share.jack.cygtool.app.HttpServletAddress;
+import com.share.jack.im.EaseMobApp;
 import com.share.jack.jpush.JPush;
 
 /**
@@ -16,5 +17,6 @@ public class MyApplication extends CygApplication {
 //        HttpServletAddress.getInstance().setOnlineAddress("http://192.168.1.103:8080/FriendCircle/");
         HttpServletAddress.getInstance().setOnlineAddress("http://192.168.1.102:8080/FriendCircle/");
 //        HttpServletAddress.getInstance().setOnlineAddress("http://192.168.1.103:8080/FriendCircle/");
+        EaseMobApp.initialize();
     }
 }
