@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CygTool/CygTool.iml" filepath="$PROJECT_DIR$/CygTool/CygTool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EaseUI/EaseUI.iml" filepath="$PROJECT_DIR$/EaseUI/EaseUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/FriendCircleDemo.iml" filepath="$PROJECT_DIR$/FriendCircleDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/JPush/JPush.iml" filepath="$PROJECT_DIR$/JPush/JPush.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

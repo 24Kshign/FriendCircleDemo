@@ -21,7 +21,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':JPush')
+    compile project(':EaseUI')
     testCompile 'junit:junit:4.12'
     compile 'com.github.chrisbanes:PhotoView:1.3.1'
 }

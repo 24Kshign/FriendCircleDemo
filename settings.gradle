@@ -1,1 +1,1 @@
-include ':app', ':CygTool', ':JPush'
+include ':app', ':CygTool', ':JPush', ':EaseUI'

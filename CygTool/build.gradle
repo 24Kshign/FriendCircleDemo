@@ -33,14 +33,10 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     compile 'com.alibaba:fastjson:1.1.45.android'
-    //Glide
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    //ButterKnife
-    compile 'com.jakewharton:butterknife:7.0.0'
-    //Dialog
-    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
     //xrecyclerview
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     //ImageSelector
     compile 'com.yancy.imageselector:imageselector:1.3.3'
+    //Dialog
+    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
 }
